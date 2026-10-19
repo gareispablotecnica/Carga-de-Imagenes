@@ -15,7 +15,7 @@ const RegistrarProducto = async (req, res) => {
 
         // --> Validamos los campos obligatorios
         if (!Nombre || Precio === undefined || Precio === '' || Stock === undefined || Stock === '' || !Descripcion) {
-
+            if(req.file) fs.unlinkSync(req.file.path , ()=>{});
 
             return res.status(400).json({
                 Mensaje: 'Debe completar todos los campos obligatorios'
@@ -31,7 +31,8 @@ const RegistrarProducto = async (req, res) => {
             function (error) {
                 if (error) {
 
-                    const Imagen = req.file ? req.file.filename : null;
+                    if(req.file) fs.unlinkSync(req.file.path , ()=>{}); 
+                    // const Imagen = req.file ? req.file.filename : null;
                     // --> Ternario ? (si) - :(no)
 
                     console.error('Error al Registrar Producto ⛔', error.message);

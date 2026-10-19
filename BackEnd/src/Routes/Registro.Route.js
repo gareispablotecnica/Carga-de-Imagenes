@@ -6,13 +6,13 @@ const multer = require('multer');
 // --> para las rutas del proyecto
 const path=require('path')
 
-const ubicacionCarpeta=path.resolve(__dirname, '../../uploads');
+const ubicacionCarpeta=path.resolve(__dirname, '../uploads');
 
 const { RegistrarProducto } = require('../Controller/Registro.Controller');
 
 const ConfiguracionImagenes = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '../uploads');
+        cb(null, ubicacionCarpeta);
     },
 
     filename: (req, file, cb) => {
@@ -25,7 +25,7 @@ const SubirImagen = multer({
     storage: ConfiguracionImagenes
 });
 
-Router.post('/RegistrarProducto', SubirImagen.single('imagen'), RegistrarProducto);
+Router.post('/RegistrarProducto', SubirImagen.single('Imagen'), RegistrarProducto);
 
 // --> Exportamos las rutas
 module.exports = Router;
