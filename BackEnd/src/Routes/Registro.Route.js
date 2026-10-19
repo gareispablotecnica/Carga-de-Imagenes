@@ -1,6 +1,8 @@
 
 const express = require('express');
 const Router = express.Router();
+// --> Dependencia  para manejar archivos y rutas de archivos
+const multer = require('multer');
 
 const ubicacionCarpeta=path.resolve(__dirname, '../uploads');
 
