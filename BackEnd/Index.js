@@ -1,11 +1,30 @@
 const Express= require('express')
-const App = Express()
+const cors = require('cors');
+const path = require('path');
 
-const PORT = process.env.PORT || 3001
+// --> Inicializamos Express
+const App = Express();
 
-App.use(Express.json())
-App.use(cors())
+// --> Indicamos el puerto
+const PORT = process.env.PORT || 3001;
 
+// --> Middlewares
+App.use(Express.json());
+App.use(cors());
+
+// --> Importamos las rutas
+const RegistroRoutes = require('./src/Routes/Registro.Route');
+
+// --> Habilitamos el acceso a las imagenes
+App.use(
+    '/uploads',
+    Express.static(path.resolve(__dirname, 'uploads'))
+);
+
+// --> Utilizamos las rutas de productos
+App.use('/api/Productos', RegistroRoutes);
+
+// --> Iniciamos el servidor
 App.listen(PORT,()=>{
-    console.log(`Servidor corriendo en el puerto ${PORT}`)
+    console.log(`Servidor corriendo en el puerto http:localhost:${PORT}`)
 })
