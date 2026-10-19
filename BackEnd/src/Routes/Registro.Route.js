@@ -2,6 +2,7 @@
 const express = require('express');
 const Router = express.Router();
 const ubicacionCarpeta='../uploads';
+
 const { RegistrarProducto } = require('../Controller/Registro.Controller');
 
 const ConfiguracionImagenes = multer.diskStorage({
