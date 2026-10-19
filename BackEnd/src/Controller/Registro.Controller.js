@@ -6,14 +6,15 @@ const fs = require('fs');
 const path = require('path');
 
 // --> Funcion para Registrar Productos
- const RegistrarProducto =async (req, res) => {
+const RegistrarProducto = async (req, res) => {
     try {
         // --> Obtenemos los datos del producto
         const { Nombre, Precio, Stock, Descripcion } = req.body;
-       
+        const Imagen = req.file ? req.file.filename : null;
+        // --< Ternario ? (si) - :(no)
 
         // --> Validamos los campos obligatorios
-        if (!Nombre ||Precio === undefined ||Precio === '' ||Stock === undefined ||Stock === '' ||!Descripcion) {
+        if (!Nombre || Precio === undefined || Precio === '' || Stock === undefined || Stock === '' || !Descripcion) {
 
 
             return res.status(400).json({
@@ -21,15 +22,17 @@ const path = require('path');
             });
         }
 
-      const query=`INSERT INTO Productos
+        const query = `INSERT INTO Productos
             (Nombre, Precio, Stock, Descripcion, Imagen)
             VALUES (?, ?, ?, ?, ?)`
 
         // --> Ejecutamos la consulta SQL
-        ConexionBD.run(query,[Nombre, Precio, Stock, Descripcion, Imagen],
+        ConexionBD.run(query, [Nombre, Precio, Stock, Descripcion, Imagen],
             function (error) {
                 if (error) {
-   
+
+                    const Imagen = req.file ? req.file.filename : null;
+                    // --> Ternario ? (si) - :(no)
 
                     console.error('Error al Registrar Producto ⛔', error.message);
 
@@ -58,4 +61,4 @@ const path = require('path');
 
 
 // --> Exportamos las funciones del controlador
-module.exports = {RegistrarProducto};
+module.exports = { RegistrarProducto };
