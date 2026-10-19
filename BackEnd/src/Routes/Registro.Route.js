@@ -1,7 +1,8 @@
 
 const express = require('express');
 const Router = express.Router();
-const ubicacionCarpeta='../uploads';
+
+const ubicacionCarpeta=path.resolve(__dirname, '../uploads');
 
 const { RegistrarProducto } = require('../Controller/Registro.Controller');
 
