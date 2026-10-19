@@ -6,13 +6,13 @@ const multer = require('multer');
 // --> para las rutas del proyecto
 const path=require('path')
 
-const ubicacionCarpeta=path.resolve(__dirname, '../uploads');
+const ubicacionCarpeta=path.resolve(__dirname, '../../uploads');
 
 const { RegistrarProducto } = require('../Controller/Registro.Controller');
 
 const ConfiguracionImagenes = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, ubicacionCarpeta);
+        cb(null, '../uploads');
     },
 
     filename: (req, file, cb) => {
